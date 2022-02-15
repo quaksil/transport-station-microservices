@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: aksil
+Build-Jdk: 11.0.12
+Implementation-Title: micro-rfid-service
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.archlog
+Implementation-URL: https://spring.io/projects/spring-boot/micro-rfid-se
+ rvice
+Created-By: Maven Integration for Eclipse
+
