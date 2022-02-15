@@ -1,0 +1,4 @@
+com/archlog/microadmin/controller/PassengerController.class
+com/archlog/microadmin/repository/PassengerRepository.class
+com/archlog/microadmin/model/Passenger.class
+com/archlog/microadmin/MicroAdminServiceApplication.class

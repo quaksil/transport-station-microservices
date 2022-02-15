@@ -1,0 +1,4 @@
+/home/aksil/archlog-workspace/transport-station-microservices/micro-admin-service/src/main/java/com/archlog/microadmin/model/Passenger.java
+/home/aksil/archlog-workspace/transport-station-microservices/micro-admin-service/src/main/java/com/archlog/microadmin/repository/PassengerRepository.java
+/home/aksil/archlog-workspace/transport-station-microservices/micro-admin-service/src/main/java/com/archlog/microadmin/MicroAdminServiceApplication.java
+/home/aksil/archlog-workspace/transport-station-microservices/micro-admin-service/src/main/java/com/archlog/microadmin/controller/PassengerController.java
