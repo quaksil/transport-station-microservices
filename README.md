@@ -290,7 +290,7 @@ public class RFIDController implements SerialPortDataListener {
 
 Invocation du service:
 
-```
+```java
 	@GetMapping("/rfids/{passengerid}")
 	public void readRFID(@PathVariable("passengerid") long passengerid) {
 
@@ -310,7 +310,7 @@ Invocation du service:
 				// object
 				sp.addDataListener(this);
 			}
-			```
+```
 
 ### micro-auth-service
 
