@@ -70,11 +70,13 @@ On l'a déjà aussi précisé plus haut, donc on va procéder à étaler le proj
 
 - Tout d'abord, Eureka Server, Api Gateway et SpringCloud Config sont à deployer (bien qu'on peut déployer les microservices avant la gateway)
 
-- Grâce à dev-tools, on peut mieux gérer nos services et faire des modifications **dynamiquement** sans redémarrer le serveur http.
-- 
-![image](https://user-images.githubusercontent.com/33737302/154195037-2accb112-bf24-4a06-a7db-a0dfbf3d7ac3.png)
+![image](https://user-images.githubusercontent.com/33737302/154195795-8c4d5651-4ca7-4827-8eb7-d0e93a324790.png)
 
-![image](https://user-images.githubusercontent.com/33737302/154195464-2330bb7e-e0e1-44dd-bff0-d7eb5de53b1d.png)
+- Grâce à dev-tools, on peut mieux gérer nos services et faire des modifications **dynamiquement** en temps réél sans redémarrer le serveur http.
+
+![image](https://user-images.githubusercontent.com/33737302/154195580-ae281043-a2bc-465e-b134-75a3cb545242.png)
+
+
 
 
 
