@@ -1,6 +1,8 @@
 ## Project ArchLog22
 *Application basée sur les micro-services pour la gestion automatique du transport des passagers de la gare routière.*
 
+Tarik Haroun
+Manal Smaali
 
 ### ABSTRACT
 
