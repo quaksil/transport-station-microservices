@@ -14,10 +14,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>micro-rfid-service</name>
 	<description>RFID Portal for Transport Station</description>
+	
 	<properties>
 		<java.version>11</java.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-		<spring-cloud.version>Hoxton.SR3</spring-cloud.version>
+		<spring-cloud.version>2021.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
 

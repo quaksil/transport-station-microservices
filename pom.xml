@@ -23,5 +23,8 @@
 		<module>micro-admin-service</module>
 		<module>micro-rfid-service</module>
 		<module>micro-eureka-service</module>
+		<module>micro-auth-service</module>
+		<module>micro-gateway-service</module>
+		<module>micro-config-service</module>
 	</modules>
 </project>
