@@ -46,32 +46,45 @@ Les cas d’utilisations qui peuvent être envisagés:
 
 - Effectuer une transaction grâce à la carte RFID.
 
-Plus en détail, un administrateur à déjà le dossier (informations) du passager, l'intègre dans le système si bien valable, offre la carte d'abonnement au passagers selon leurs âges (pour une remise), donc c'est l'administrateur qui gère ces utilisateurs.
+Plus en détail, un administrateur à déjà le dossier (informations) du passager, l'intègre dans le système si bien valable, offre la carte d'abonnement au passagers selon leurs âges (pour une remise), donc c'est l'administrateur qui gère ces utilisateurs. La carte contient un nombre fini de transactions.
 
 Ensuite, selon le developpement des évenements, plusieurs scénarios peuvent arriver et c'est là que l'administrateur peut blocker ou débloquer la carte.
 
-La carte contient un nombre fini de transactions.
+### Patrons de Conception
+
+- *Comme on l'a déjà mentionné plus haut, la relation entre le REST Controller et AngularJS est dynamique ou chacun est séparé de l'autre (back-end, front-end), on peut démarrer une instance du front-end et se mettre tout le temps à observer les requêtes.*
+
+- Puis, on a ceux proposés par spring, dont spring MVC, spring Cloud.
+
+- L'api gateway (proxy).
+
+### Layout du projet
+
+Comme vous pouvez le voir sur la photo, on a crée un projet `PARENT` qui contient tout les autres micro services, il s'agit d'un meilleur moyen de gestion.
+**Aussi, les modules contenus dans le projet parent héritent de ses dépendences [pom.xml]*
 
 
+![image](https://user-images.githubusercontent.com/33737302/154194201-d8cc674e-b69a-4db4-b021-9cb5168159d3.png)
 
-### Consumer Agent
+On l'a déjà aussi précisé plus haut, donc on va procéder à étaler le projet selon ce qu'on a fait:
+
+- Tout d'abord, Eureka Server, Api Gateway et SpringCloud Config sont à deployer (bien qu'on peut déployer les microservices avant la gateway)
+
+- Grâce à dev-tools, on peut mieux gérer nos services et faire des modifications **dynamiquement** sans redémarrer le serveur http.
+- 
+![image](https://user-images.githubusercontent.com/33737302/154195037-2accb112-bf24-4a06-a7db-a0dfbf3d7ac3.png)
+
+![image](https://user-images.githubusercontent.com/33737302/154195464-2330bb7e-e0e1-44dd-bff0-d7eb5de53b1d.png)
 
 
-## Client-Server architecture
-
-We can split this application to a client-server application by simply running the buyer and the seller agents on a host main container and the client (consumer) on a another machine as a client, once logged in, the consumer agent will be deployed on the remote host main container.
-
-### Multiple JADE platforms and containers
 
 ### Usage
-
-### Executing program
 
 ## Help
 
 ## Authors
 Tarik Haroun<br/>
-Gmail: tarik.haroun@univ-constantine2.dz 
+Email: tarik.haroun@univ-constantine2.dz 
 
 ## Version History
 
