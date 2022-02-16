@@ -241,6 +241,7 @@ sur localhost:8081
 Le service qui nous permet de scanner une carte de voyageur et voir si c'est bien possible d'effectuer une transaction ou non. Voici une partie du code et des screenshot:
 
 Cette photo montre que la carte n'est plus valide.
+
 ![image](https://user-images.githubusercontent.com/33737302/154197428-efb9b837-9c69-4812-9f0b-f3aa3355ed84.png)
 
 Grâce à postman, on peut envoyer une demande de reservation ce qui va engendrer cette action de verification.
