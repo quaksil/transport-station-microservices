@@ -76,9 +76,240 @@ On l'a déjà aussi précisé plus haut, donc on va procéder à étaler le proj
 
 ![image](https://user-images.githubusercontent.com/33737302/154195580-ae281043-a2bc-465e-b134-75a3cb545242.png)
 
+### micro-admin-service
+Ce service offre les opérations CRUD avec REST API en utilisant donc, le RestController voici un extrait de code des requêtes et réponses HTTP:
+
+```java
+@CrossOrigin(origins = "http://localhost:8081")
+@RestController
+@RequestMapping("/passenger-api")
+public class PassengerController {
+
+	@Autowired
+	PassengerRepository passengerRepository;
+
+	@GetMapping("/passengers")
+	public ResponseEntity<List<Passenger>> getAllPassengers(@RequestParam(required = false) String username) {
+		try {
+			List<Passenger> passengers = new ArrayList<Passenger>();
+			if (username == null)
+				passengerRepository.findAll().forEach(passengers::add);
+			else
+				passengerRepository.findByUsername(username).forEach(passengers::add);
+			if (passengers.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(passengers, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/passengers/{id}")
+	public ResponseEntity<Passenger> getPassengerById(@PathVariable("id") long id) {
+		Optional<Passenger> passengerData = passengerRepository.findById(id);
+		if (passengerData.isPresent()) {
+			return new ResponseEntity<>(passengerData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PostMapping("/passengers")
+	public ResponseEntity<Passenger> createPassenger(@RequestBody Passenger passenger) {
+		try {
+			Passenger _passenger = passengerRepository.save(new Passenger(passenger.getFirstname(),
+					passenger.getLastname(), passenger.getAge(), passenger.getAddress(), passenger.getOccupation(),
+					passenger.getUsername(), passenger.getPassword()));
+			return new ResponseEntity<>(_passenger, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PutMapping("/passengers/{id}")
+	public ResponseEntity<Passenger> updatePassenger(@PathVariable("id") long id, @RequestBody Passenger passenger) {
+		Optional<Passenger> passengerData = passengerRepository.findById(id);
+		if (passengerData.isPresent()) {
+			Passenger _passenger = passengerData.get();
+			_passenger.setFirstname(passenger.getFirstname());
+			_passenger.setLastname(passenger.getLastname());
+			_passenger.setAge(passenger.getAge());
+			_passenger.setAddress(passenger.getAddress());
+			_passenger.setOccupation(passenger.getOccupation());
+			_passenger.setUsername(passenger.getUsername());
+			_passenger.setPassword(passenger.getPassword());
+
+			return new ResponseEntity<>(passengerRepository.save(_passenger), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping("/passengers/{id}")
+	public ResponseEntity<HttpStatus> deletePassenger(@PathVariable("id") long id) {
+		try {
+			passengerRepository.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@DeleteMapping("/passengers")
+	public ResponseEntity<HttpStatus> deleteAllPassengers() {
+		try {
+			passengerRepository.deleteAll();
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+   ```
+   
+   Voici l'entité passer:
+   
+   ```java
+   @Entity
+   @Table(name = "passengers")
+
+   public class Passenger {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	@Column(name = "firstname")
+	private String firstname;
+
+	@Column(name = "lastname")
+	private String lastname;
+
+	@Column(name = "age")
+	private int age;
+
+	@Column(name = "address")
+	private String address;
+
+	@Column(name = "occupation")
+	private String occupation;
+
+	@Column(name = "username")
+	private String username;
+
+	@Column(name = "password")
+	private String password;	
+
+	public Passenger() {
+
+	}
+
+    	public Passenger(String firstname, String lastname, int age, String address, String occupation, String username,
+			String password) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.age = age;
+		this.address = address;
+		this.occupation = occupation;
+		this.username = username;
+		this.password = password;
+
+	}
+...
+```
+
+- Maintenant avec Postman, on peut quelques requêtes et on fait attention à la requête/réponse:
+
+La méthode POST sur le lien `/passenger-api/passengers` nous crée un nouveau compte utilisateur (Réponse 201 est OK)
+
+![image](https://user-images.githubusercontent.com/33737302/154196453-df094f2f-16be-492e-ac7f-b4c08843552e.png)
+
+Ainsi de suite pour les autres, il faut noter aussi que ceci est une REST API.
+
+On peut lancer le front avec cette commande: ![image](https://user-images.githubusercontent.com/33737302/154198360-26651c9f-c897-4df9-9881-08a0f3b3e384.png)
+
+sur localhost:8081
+
+![image](https://user-images.githubusercontent.com/33737302/154198619-22e3b3ea-c9ca-43b7-bfbf-c9149235f1ee.png)
+
+![image](https://user-images.githubusercontent.com/33737302/154198579-ce560f7e-981d-4f2b-9ee2-32ad204f7da9.png)
 
 
+### micro-rfid-service
 
+Le service qui nous permet de scanner une carte de voyageur et voir si c'est bien possible d'effectuer une transaction ou non. Voici une partie du code et des screenshot:
+
+Cette photo montre que la carte n'est plus valide.
+![image](https://user-images.githubusercontent.com/33737302/154197428-efb9b837-9c69-4812-9f0b-f3aa3355ed84.png)
+
+Grâce à postman, on peut envoyer une demande de reservation ce qui va engendrer cette action de verification.
+
+![image](https://user-images.githubusercontent.com/33737302/154197522-c101b599-058d-46d9-9742-8b181583611f.png)
+
+Une autre autre:
+
+![image](https://user-images.githubusercontent.com/33737302/154197609-988dad87-4908-4c59-8c43-e9e171827a12.png)
+
+Voici un extrait du code du contrôlleur:
+
+```java
+@RestController
+@RequestMapping("/rfid-api")
+public class RFIDController implements SerialPortDataListener {
+
+	@Autowired
+	RFIDRepository rfidRepository;
+
+	RFID rfid = new RFID();
+
+	private static String bufferReadToString = ""; // empty, but not null
+	private static int cutoffASCII = 10; // ASCII code of the character used for cut-off between received messages
+
+	@Override
+	public int getListeningEvents() {
+		return SerialPort.LISTENING_EVENT_DATA_AVAILABLE; // returns data on the Serial Port
+	}
+
+	@Override
+	public void serialEvent(SerialPortEvent event) {
+		byte[] buffer = new byte[event.getSerialPort().bytesAvailable()];
+		event.getSerialPort().readBytes(buffer, buffer.length);
+
+		String s = new String(buffer);
+		bufferReadToString = bufferReadToString.concat(s); // converts the bytes read from the Serial port to a string
+```
+
+Invocation du service:
+
+```
+	@GetMapping("/rfids/{passengerid}")
+	public void readRFID(@PathVariable("passengerid") long passengerid) {
+
+		rfid = rfidRepository.findByPassengerId(passengerid);
+
+		if (rfid == null) {
+			return;
+		} else {
+
+			SerialPort sp = SerialPort.getCommPort("/dev/ttyACM0"); // device name
+			sp.setComPortParameters(9600, 8, 1, 0); // 9600,8,1,0default connection settings for Arduino
+			sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0); // block until bytes can be written
+
+			if (sp.openPort()) {
+				System.out.println("\n __Input RFID card now..\n");
+				// PacketListener listenerObject = new PacketListener(); // creates new listener
+				// object
+				sp.addDataListener(this);
+			}```
+
+### micro-auth-service
+
+Le passager ou l'admin peuvent s'authentifier et par la suite un passager peut verifier son compte ou renouveler son abonnement.
+
+## Conclusion
+
+Grâce à ce travail de tp, on a pu enrichir nos connaissances sur un bon nombre de choses et surtout l'utilité des microservices dans un milieu imprédictible, étant donné qu'on a pas entammé la totalié de ce tp, ça reste très interessant et ça nous motive emplement pour travailler sur les micro services.
 
 ### Usage
 
