@@ -1,6 +1,6 @@
-## Project Architecture Logicielle 2022<br/>
+## Project ArchLog22
+*Application basée sur les micro-services pour la gestion automatique du transport des passagers de la gare routière.*
 
---> Application basée sur les micro-services pour la gestion automatique du transport des passagers de la gare routière.
 
 ### ABSTRACT
 
@@ -27,9 +27,30 @@ Ce qui fait l'objet de notre exploitation à ces outils c'est qu'ils ont une rel
 
 Voilà en résumé, en ce que consiste notre travail accompagné du discovery des micro services avec Eureka, l'ApiGateway qui gère les redirections vers le bon microservice ainsi que Spring Cloud Config.
 
+   ![image](https://user-images.githubusercontent.com/33737302/154192309-0b8b75e2-a745-4d56-ad8d-cb40160b9923.png)
+
 
 ## Use Case
 
+La figure représente le diagramme de cas d’utilisation globale du système en temps normal, comme un passager peut toujours faire ses abonnement dans une agence ou déposer un dossier.
+
+![image](https://user-images.githubusercontent.com/33737302/154191816-31913f39-211f-46fe-b5c3-c20a9629156b.png)
+
+Les cas d’utilisations qui peuvent être envisagés: 
+
+- S’authentifier [Agent, Passager] un cas primaire et il faut avoir déjà un compte. Il permet à l’utilisateur de s’authentifier et assurer l’accès personnel.
+
+- Faire des demandes d'abonnement recharge d'abonnement (passagers).
+
+- Consulter l’historique des voyages.
+
+- Effectuer une transaction grâce à la carte RFID.
+
+Plus en détail, un administrateur à déjà le dossier (informations) du passager, l'intègre dans le système si bien valable, offre la carte d'abonnement au passagers selon leurs âges (pour une remise), donc c'est l'administrateur qui gère ces utilisateurs.
+
+Ensuite, selon le developpement des évenements, plusieurs scénarios peuvent arriver et c'est là que l'administrateur peut blocker ou débloquer la carte.
+
+La carte contient un nombre fini de transactions.
 
 
 
