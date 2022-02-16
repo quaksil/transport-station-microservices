@@ -58,6 +58,11 @@ Ensuite, selon le developpement des évenements, plusieurs scénarios peuvent ar
 
 - L'api gateway (proxy).
 
+En plus du diagramme de classe de base: 
+
+![image](https://user-images.githubusercontent.com/33737302/154200088-4643a621-5531-4905-8e11-03173a95579d.png)
+
+
 ### Layout du projet
 
 Comme vous pouvez le voir sur la photo, on a crée un projet `PARENT` qui contient tout les autres micro services, il s'agit d'un meilleur moyen de gestion.
