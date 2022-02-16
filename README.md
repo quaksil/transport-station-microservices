@@ -21,9 +21,9 @@ Pour l'administrateur, l'api qu'on a developpé on se focalise sur une applicati
 
 Ce qui fait l'objet de notre exploitation à ces outils c'est qu'ils ont une relation `dynamique`, AngularJS dans une architecture MVC sert d' `Observer` (Le modèle), et le controlleur REST de `View`, aussi, la relation entre Angular et la vue IHM est une relation de Model-View. Dans le premier cas, selon les types de requêtes et leurs routes entre les pages et les controlleurs Angular met à jour son état à chaque fois. d'où on parle du patron `Observer`.
 
-- </b> Authentification et inscription (micro-auth-service)</b>: Ce micro service est exploié par tout utilisateur de la plateforme pour s'authentifier ou créer un nouveau compte.
+- <b> Authentification et inscription (micro-auth-service)</b>: Ce micro service est exploié par tout utilisateur de la plateforme pour s'authentifier ou créer un nouveau compte.
 
-- </b> RFID (micro-rfid-service)</b>: Ce micro service est exploité par un utilisateur (passager) possedant une carte RFID valide pour effectuer un voyage à chaque fois qu'il valide sa demande de voyage, le micro service se reveille et se met en attente jusqu'à reception du signal, si la carte est valide un voyage est soustrait de son abonnement et il est notifié.
+- <b> RFID (micro-rfid-service)</b>: Ce micro service est exploité par un utilisateur (passager) possedant une carte RFID valide pour effectuer un voyage à chaque fois qu'il valide sa demande de voyage, le micro service se reveille et se met en attente jusqu'à reception du signal, si la carte est valide un voyage est soustrait de son abonnement et il est notifié.
 
 Voilà en résumé, en ce que consiste notre travail accompagné du discovery des micro services avec Eureka, l'ApiGateway qui gère les redirections vers le bon microservice ainsi que Spring Cloud Config.
 
